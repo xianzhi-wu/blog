@@ -28,12 +28,12 @@ define("base", ["zepto"], function($){
 						settings.callback && settings.callback(_this);
 					}else{
 						if(_this.is('img')){
-							if(!_this.attr('src')) {
+							if(!!_this.attr('src')) {
 							    _this.attr('src', settings.placeholder);
 							}
 						}else{
-							console.log(!_this.css('background'))
-							if(!_this.css('background')) {
+							console.log(!!_this.css('background'))
+							if(!!_this.css('background')) {
 							    _this.css('background', 'url('+ settings.placeholder +') no-repeat center center #eee');
 							}
 						}
