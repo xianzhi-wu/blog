@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+<meta name="apple-touch-full-screen" content="YES" />
+<meta name="format-detection" content="telephone=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="description" content="">
+<meta name="author" content="www.keydone.github.io/blog">
+<!-- Add to homescreen for Chrome on Android -->
+<meta name="mobile-web-app-capable" content="yes">
+<!-- Add to homescreen for Safari on iOS -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="">
+<title></title>
+<script>
+//分辩率调整
+(function (doc, win) {
+	var docEl = doc.documentElement,
+	    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+	    recalc = function () {
+	      var clientWidth = docEl.clientWidth>=1024?736:docEl.clientWidth;
+	      if (!clientWidth) return;
+	      docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+	    };
+	if (!doc.addEventListener) return;
+	win.addEventListener(resizeEvt, recalc, false);
+	doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+</script>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div id="page">
+        <header class="intro"><div class="title">Zhi</div><div class="subTitle">高架桥过去了，路口还有好多个。</div></header>
+        <article class="articles-list"></article>
+    </div>
+    
+    <!-- loading模板 -->
+    <script type="template" id="loading-tmp">
+    	<div class="loading hide">
+        	<div class="loadEffect"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>正在载入内容
+		</div>
+    </script>
+    
+    <!-- 列表模板 -->
+    <script type="template" id="article-tmp">
+	    <a href="javascript:void(0);">
+			<div class="img lazy" data-src="_img_"></div>
+			<p>_content_</p>
+		</a>
+	</script>
+    
+    <script src="js/require.min.js"></script>
+    <script>
+        require(["zepto", "base"], function(){
+        	var index = {
+        			template : $('#article-tmp').html(),
+        			loading : $('#loading-tmp').html(),
+        	        list : $('.articles-list'),
+        	        page : 0,
+
+        			showArticles : function(){
+        				var _this = this;
+        				var dataArr = [];
+        				
+        				if(_this.list.find('.loading').length == 0) {
+        					_this.list.append(_this.loading);
+        				}
+        	            if(_this.page > 0) {
+        					$(".loading", _this.list).removeClass("hide");
+        				}
+        				$.getJSON('/app/jsp/blog/data/data.json', function(data){
+        					$(".loading", _this.list).addClass("hide");
+        					_this.page++;
+        					var dataSet = ("articles"+_this.page);
+        					if(data[dataSet]){
+        	   					for(var key in data[dataSet]) {
+        	   						dataArr.push(data[dataSet][key])
+        	   					}
+        	   					$(".loading", _this.list).before(attachTemplateToData(_this.template, dataArr));
+        	   					var lazy = $('.lazy');
+        	   		            lazy.lazyload();
+        					}else{
+        						//数据显示完了
+        					}
+        				});
+        			},
+        			
+        	        init : function(){
+        	        	var _this = this;
+        	        	_this.showArticles();
+        	        	
+        	            // 对元素的滚动监听
+        	   			$(window).scroll(function() {
+        	   				// 滚动条高度 + 窗口高度  >= 文档高度
+        					   				if ($(window).scrollTop() + $(window).height()+ 40 >= $(document).height()) {
+        	   					_this.showArticles();
+        	   				}
+        	   			});
+        	        }
+        	}
+        	index.init();
+        })
+    </script>
+</body>
+</html>
