@@ -72,7 +72,7 @@
         	            if(_this.page > 0) {
         					$(".loading", _this.list).removeClass("hide");
         				}
-        				$.getJSON('/data/data.json', function(data){
+        				$.getJSON('/blog/data/data.json', function(data){
         					$(".loading", _this.list).addClass("hide");
         					_this.page++;
         					var dataSet = ("articles"+_this.page);
