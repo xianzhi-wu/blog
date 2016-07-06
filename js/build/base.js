@@ -1,19 +1,5 @@
-//分辩率调整
-(function (doc, win) {
-	var docEl = doc.documentElement,
-	    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-	    recalc = function () {
-	      var clientWidth = docEl.clientWidth>=1024?736:docEl.clientWidth;
-	      if (!clientWidth) return;
-	      docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-	    };
-	if (!doc.addEventListener) return;
-	win.addEventListener(resizeEvt, recalc, false);
-	doc.addEventListener('DOMContentLoaded', recalc, false);
-})(document, window);
-
+require(["zepto"], function(){
 //zepto图片懒加载插件
-
 $.fn.lazyload = function(settings){
 	var _self=$(this), winST = 0, $win = $(window);
 	settings = $.extend({
@@ -77,3 +63,4 @@ var attachTemplateToData = function(template, data) {
 	}
 	return fragment;
 };
+})
