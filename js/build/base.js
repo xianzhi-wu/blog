@@ -44,7 +44,7 @@ $.fn.lazyload = function(settings){
 }
 
 // 将模板和数据作为参数，通过数据里所有的项将值替换到模板的标签上
-var attachTemplateToData = function(template, data) {
+function attachTemplateToData(template, data) {
 	var i = 0,
 		len = data.length,
 		fragment = '';
@@ -63,4 +63,7 @@ var attachTemplateToData = function(template, data) {
 	}
 	return fragment;
 };
+return {
+	attachTemplateToData : attachTemplateToData
+}
 })
