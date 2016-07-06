@@ -1,11 +1,11 @@
 {
 	"articles1" : [
 		{
-		  "img" : "../../images/IMG_669.JPG",
+		  "img" : "/images/IMG_669.JPG",
 		  "content" : "测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试"
 		},
 		{
-		  "img" : "../../images/shareTip.jpg",
+		  "img" : "../images/shareTip.jpg",
 		  "content" : "测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试测试"
 		},
 		{
