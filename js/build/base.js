@@ -33,6 +33,7 @@ define("base", ["zepto"], function($){
 							}
 						}else{
 							if(!_this.css('background')) {
+								console.log(!_this.css('background'))
 							    _this.css('background', 'url('+ settings.placeholder +') no-repeat center center #eee');
 							}
 						}
