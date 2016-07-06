@@ -1,4 +1,4 @@
-require(["zepto"], function(){
+define("base", ["zepto"], function($){
 //zepto图片懒加载插件
 $.fn.lazyload = function(settings){
 	var _self=$(this), winST = 0, $win = $(window);
