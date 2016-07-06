@@ -80,7 +80,7 @@
         	   					for(var key in data[dataSet]) {
         	   						dataArr.push(data[dataSet][key])
         	   					}
-        	   					$(".loading", _this.list).before(attachTemplateToData(_this.template, dataArr));
+        	   					$(".loading", _this.list).before(base.attachTemplateToData(_this.template, dataArr));
         	   					var lazy = $('.lazy');
         	   		            lazy.lazyload();
         					}else{
