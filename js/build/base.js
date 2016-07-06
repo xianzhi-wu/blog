@@ -30,7 +30,7 @@ define("base", ["zepto"], function($){
 							    _this.attr('src', settings.placeholder);
 							}
 						}else{
-console.log(_this.css('background');
+console.log(_this.css('background'));
 							console.log(_this.css('background').indexOf('#eee'))
 							if(_this.css('background').indexOf('#eee') < 0) {
 							    _this.css('background', 'url('+ settings.placeholder +') no-repeat center center #eee');
