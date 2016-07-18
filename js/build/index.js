@@ -15,7 +15,7 @@ requirejs(["zepto", "base"], function($, base){
 	            if(_this.page > 0) {
 					$(".loading", _this.list).removeClass("hide");
 				}
-				$.getJSON('blog/data/data.json', function(data){
+				$.getJSON('data/data.json', function(data){
 					$(".loading", _this.list).addClass("hide");
 					_this.page++;
 					var dataSet = ("articles"+_this.page);
