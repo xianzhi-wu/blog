@@ -23,7 +23,6 @@ define("base", ["zepto"], function($){
 						}
 						_this.removeAttr('data-src');
 						_this.addClass(settings.effect);
-						console.log(settings.effect)
 						_this.removeClass("lazy");
 					}else{
 						if(_this.is('img')){
