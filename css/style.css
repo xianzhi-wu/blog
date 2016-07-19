@@ -4,7 +4,7 @@
 * Date: 2015-11-30;
 **/
 html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h4, h5, h6, form, input, button, textarea, p, th, td, a,article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,audio,canvas,video {margin:0;padding:0;border:0;}
-body {width:100%;max-width:540px;margin:0 auto;font-family:Helvetica,Hiragino Sans GB,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#333;background:#000;}
+body {width:100%;max-width:16rem;margin:0 auto;font-family:Helvetica,Hiragino Sans GB,Arial,sans-serif;-webkit-font-smoothing:antialiased;color:#333;background:#000;}
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section,audio,canvas,video {display: block;}
 h1, h2, h3, h4, h5, h6 {font-weight:normal;}
 i {font-style:normal;display:block;}
