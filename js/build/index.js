@@ -9,10 +9,6 @@ requirejs(["zepto", "base"], function($, base){
 			showArticles : function(){
 				var _this = this;
 				var dataArr = [];
-				
-				if(_this.$wrapper.find('.loading').length == 0) {
-					_this.$wrapper.append(_this.loading);
-				}
 	            if(_this.page > 0) {
 					$(".loading", _this.$wrapper).removeClass("hide");
 				}
