@@ -29,6 +29,8 @@ requirejs(["zepto", "base"], function($, base){
 	   		            lazy.lazyload();
 					}else{
 						//数据显示完了
+						$(".loading .loadEffect span").remove();
+						$(".loading .loadEffect").text("没有更多文章了...");
 					}
 				});
 			},
