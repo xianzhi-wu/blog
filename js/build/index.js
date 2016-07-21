@@ -8,9 +8,7 @@ requirejs(["zepto", "base"], function($, base){
 			showArticles : function(){
 				var _this = this;
 				var dataArr = [];
-	            if(_this.page > 0) {
-					$(".loading", _this.$wrapper).removeClass("hide");
-				}
+				$(".loading", _this.$wrapper).removeClass("hide");
 				$.getJSON('/blog/data/data.json', function(data){
 					$(".loading", _this.$wrapper).addClass("hide");
 					_this.page++;
