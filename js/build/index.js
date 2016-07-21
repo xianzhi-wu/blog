@@ -1,7 +1,6 @@
 requirejs(["zepto", "base"], function($, base){
 	var index = {
 			template : $('#article-tmp').html(),
-			loading : $('#loading-tmp').html(),
 	        $list : $('.articles-list'),
 	        $wrapper : $("#articles-wrapper"),
 	        page : 0,
