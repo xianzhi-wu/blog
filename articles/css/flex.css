@@ -23,9 +23,9 @@
 .ac-spacearound{-webkit-align-content:space-around;align-content:space-around;}
 .ac-stretch{-webkit-align-content:stretch;align-content:stretch;}
 .item{padding:15px;background:red;margin:5px;}
-.col01{background:red;}
-.col02{background:green;}
-.col03{background:blue;}
+.red{background:red;}
+.green{background:green;}
+.blue{background:blue;}
 .h50{height:50px;}
 .h20{height:20px;}
 .h40{height:40px;}
