@@ -16,7 +16,7 @@ requirejs(["zepto", "base"], function($, base){
 				}
 				var dataArr = [];
 				_this.$loading.removeClass("hide");
-				$.getJSON('/app/jsp/blog/data/data.json', function(data){
+				$.getJSON('/blog/data/data.json', function(data){
 					_this.$loading.addClass("hide");
 					_this.len = Object.keys(data).length;
 					var dataSet = "articles"+(_this.page+1);
