@@ -1,19 +1,27 @@
 requirejs(["zepto", "base"], function($, base){
 	var index = {
 			template : $('#article-tmp').html(),
+			loading : $('#loading-tmp').html(),
 	        $list : $('.articles-list'),
 	        $wrapper : $("#articles-wrapper"),
+	        $loading : $(".loading", this.$wrapper),
 	        page : 0,
+	        len : 0,
 
 			showArticles : function(){
 				var _this = this;
+				if(_this.page!=0 && _this.page == _this.len) {
+					_this.$loading.remove();
+					return;
+				}
 				var dataArr = [];
-				$(".loading", _this.$wrapper).removeClass("hide");
-				$.getJSON('/blog/data/data.json', function(data){
-					$(".loading", _this.$wrapper).addClass("hide");
-					_this.page++;
-					var dataSet = ("articles"+_this.page);
+				_this.$loading.removeClass("hide");
+				$.getJSON('/app/jsp/blog/data/data.json', function(data){
+					_this.$loading.addClass("hide");
+					_this.len = Object.keys(data).length;
+					var dataSet = "articles"+(_this.page+1);
 					if(data[dataSet]){
+						_this.page++;
 	   					for(var key in data[dataSet]) {
 	   						dataArr.push(data[dataSet][key]);
 	   					}
@@ -22,7 +30,6 @@ requirejs(["zepto", "base"], function($, base){
 	   		            lazy.lazyload();
 					}else{
 						//数据显示完了
-						$(".loading").remove();
 					}
 				});
 			},
