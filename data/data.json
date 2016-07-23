@@ -4,6 +4,11 @@
 		  "link" : "https://xianzhi-wu.github.io/blog/articles/flex.html",
 		  "img" : "/blog/images/flex.jpg",
 		  "content" : "2009年，w3c提出了一种新的页面布局方式flex。它得到了全部浏览器的支持，因此我们可以放心的使用。通过使用它我们可以更高效、简便地完成可伸缩的页面布局。"
+		},
+		{
+		  "link" : "https://xianzhi-wu.github.io/blog/articles/closure.html",
+		  "img" : "/blog/images/closure.jpg",
+		  "content" : "学习javascript，有一个重要的概念－闭包。闭包是有权访问另一个函数作用域中的变量的函数，即定义在函数里面的函数就是闭包。"
 		}
 	]
 }
