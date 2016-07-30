@@ -1,0 +1,43 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">       
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<title>window.history</title>
+<link rel="stylesheet" href="css/common.css">
+</head>
+
+<body>
+    <div class="content">
+        <h1>window.history在微信开发中的应用</h1>
+        <div class="author">by Zhi</div>
+        <p>在开发微信公众号的时候，下单跳到确认订单页面，当用户点击返回键时，需要给用户一个“确认返回”的提示。使用html5 API - window.history的popstate事件可以监听浏览器前进或者后退的动作。代码如下：</p>
+        <pre>
+        pushHistory();//页面加载的时候往window.history压入“＃”
+        //监听浏览器前进或者后退的动作
+        window.addEventListener("popstate", function(e) {
+            //弹出对话框（在此忽略对话框代码）
+            //如果按“取消”，再次压入“＃”（pushHistory()）
+            //如果按“确定”，可以使用window.history.back()返回上一页
+        }, false);
+        
+        function pushHistory() {
+            var state = {
+              title: "title",
+              url: "#"
+            };
+            window.history.pushState(state, "title", "#");
+        }</pre>
+        <p>其中history.pushState(data,title,url)，第一个参数data为状态对象，记录历史记录点的额外对象，可以为空；第二个参数title为页面标题，目前所有浏览器都不支持，可以为空；可选的url：浏览器不会检查url是否存在，只改变url，url必须同域，不能跨域。<br>想了解更多关于window.history详情，请点击以下链接：<br>
+        <a href="https://msdn.microsoft.com/zh-cn/library/hh920758(v=vs.85).aspx" style="text-decoration:underline;margin:8px 0;">https://msdn.microsoft.com/zh-cn/library/hh920758(v=vs.85).aspx</a>
+        <a href="https://developer.mozilla.org/zh-CN/docs/Web/Events/popstate" style="text-decoration:underline;margin:8px 0;">https://developer.mozilla.org/zh-CN/docs/Web/Events/popstate</a></p>
+    </div>
+</body>
+</html>
