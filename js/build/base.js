@@ -1,7 +1,7 @@
 define("base", ["zepto"], function($){
 	//zepto图片懒加载插件
 	$.fn.lazyload = function(options){
-		var _self=$(this), winST = 0, $win = $(window);
+		var _elements=$(this), winST = 0, $win = $(window);
 		var settings = {
 			container : $win,			//图片懒加载的容器，默认为window
 			threshold : 30,				//默认提前加载距离
@@ -10,7 +10,7 @@ define("base", ["zepto"], function($){
 		},
 		settings = $.extend(settings, options || {});
 	    function lazyLoad(){
-			_self.each(function(){
+			_elements.each(function(){
 				var _this = $(this), img = _this.attr('data-src'), _offsetTop = _this.offset().top;
 				if(_this.attr('data-src')){
 					if((_offsetTop - settings.threshold) <= (settings.container.height() + winST)){
