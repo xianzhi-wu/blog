@@ -85,7 +85,6 @@ $.fn.lazyload=function(opts){
         }else{
             fold=$(settings.container).offset().top+$(settings.container).height();
         }
-
         return fold<=$(element).offset().top-settings.threshold;
     };
     //判断元素是否在可视区右边
