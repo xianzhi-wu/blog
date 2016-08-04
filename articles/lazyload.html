@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">       
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<title>zepto lazyload图片懒加载</title>
+<link rel="stylesheet" href="../css/common.css">
+</head>
+<body>
+    <div class="content">
+        <h1>移动端网页性能篇：zepto图片懒加载插件zepto.lazyload.js</h1>
+        <div class="author">by Zhi</div>
+        <p>使用lazyload，在可视区之外的图片将不会被加载，可以减少不必要的请求，减轻服务器的负担。<br>
+        思路：<br>
+        1、放置这组图片的容器，window或者某个div标签；<br>
+        2、将图片的url放置在一个自定义的属性中，如data-src，如果显示图片的标签出现在可视区，就把url放到img标签的src里。本例是将图片设置为div的背景显示。</p>
+        <div class="subTitle">html部分:</div>
+        <p>
+        <textarea style="width:100%;" rows="4" readonly>
+<div class="img lazy" data-src="images/example01.jpg"></div>
+<div class="img lazy" data-src="images/example02.jpg"></div>
+<div class="img lazy" data-src="images/example03.jpg"></div>
+<div class="img lazy" data-src="images/example04.jpg"></div>
+        </textarea>
+        </p>
+        <div class="subTitle">css部分:</div>
+        <p>
+        .img {height:200px;width:200px;background-size:cover;}<br>
+        .fadeIn {-webkit-animation:fadeIn 600ms linear 0ms 1 normal both;animation:fadeIn 600ms linear 0ms 1 normal both;opacity: 1;}<br>
+        @-webkit-keyframes fadeIn{0%{opacity:0} 100%{opacity:1}}<br>
+        @keyframes fadeIn{0%{opacity:0} 100%{opacity:1}}
+        </p>
+        <div class="subTitle">js代码：</div>
+<pre style="word-break:break-all;">//zepto图片懒加载插件
+$.fn.lazyload = function(opts){
+    var _elements=$(this);
+    var settings = {
+        container :  window,		//图片懒加载的容器，默认为window
+        threshold : 30,				//默认提前加载距离
+        effect: "fadeIn",
+        placeholder : ""           //可自行添加图片的地址
+    },
+    settings = $.extend(settings, opts || {});
+    function update(){
+        _elements.each(function(){
+            var _this = $(this), img = _this.attr('data-src');
+            if(img) {
+                if($.inviewport(_this, settings)) {
+                    //如果是img标签
+                    if(_this.is('img')) {
+                        _this.attr('src', img);
+                    } else {
+                        //如果作为背景图
+                        _this.css('background', '');
+                        _this.css('background-image', 'url('+ img +')');
+                    }
+                    _this.removeAttr('data-src');
+                    _this.addClass(settings.effect);
+                    _this.removeClass("lazy");
+                } else {
+                    if(_this.is('img')) {
+                        if(!!_this.attr('src')) {
+                            _this.attr('src', img);
+                        }
+                     } else {
+                         if(_this.css('background').indexOf('no-repeat') < 0) {
+                          _this.css('background', 'url('+ img +') no-repeat center center #eee');
+                     }
+                   }
+                }
+            } 
+        });
+    }			
+    //判断元素是否在可视区下面
+    $.belowthefold = function(element, settings) {
+        var fold;
+        if (settings.container === undefined || settings.container === window) {
+            fold = (window.innerHeight ? window.innerHeight : $(window).height()) + $(window).scrollTop();
+        } else {
+            fold = $(settings.container).offset().top + $(settings.container).height();
+        }
+
+        return fold <= $(element).offset().top - settings.threshold;
+    };
+    //判断元素是否在可视区右边
+    /*$.rightoffold = function(element, settings) {
+        var fold;
+
+        if (settings.container === undefined || settings.container === window) {
+            fold = $(window).width() + $(window).scrollLeft();
+        } else {
+            fold = $(settings.container).offset().left + $(settings.container).width();
+        }
+
+        return fold <= $(element).offset().left - settings.threshold;
+    };*/
+    //判断元素是否在可视区上面
+    $.abovethetop = function(element, settings) {
+        var fold;
+
+        if (settings.container === undefined || settings.container === window) {
+            fold = $(window).scrollTop();
+        } else {
+            fold = $(settings.container).offset().top;
+        }
+
+        return fold >= $(element).offset().top + settings.threshold  + $(element).height();
+    };
+    //判断图片是否在可视区左边
+    /*$.leftofbegin = function(element, settings) {
+        var fold;
+
+        if (settings.container === undefined || settings.container === window) {
+            fold = $(window).scrollLeft();
+        } else {
+            fold = $(settings.container).offset().left;
+        }
+
+        return fold >= $(element).offset().left + settings.threshold + $(element).width();
+    };*/
+    //判断图片是否在可视区里面
+    $.inviewport = function(element, settings) {
+         /*return !$.rightoffold(element, settings) && !$.leftofbegin(element, settings) &&
+                !$.belowthefold(element, settings) && !$.abovethetop(element, settings);*/
+        return !$.belowthefold(element, settings) && !$.abovethetop(element, settings);;
+     };
+     
+    $container = (settings.container === undefined || settings.container === window) ? $(window) : $(settings.container);
+    
+    update();
+    $container.on('scroll',function(){
+        update();
+    });
+};</pre>
+    </div>
+</body>
+</html>
