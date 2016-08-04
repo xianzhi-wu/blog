@@ -14,6 +14,11 @@
 		  "link" : "https://xianzhi-wu.github.io/blog/articles/win-history.html",
 		  "img" : "/blog/images/history.jpg",
 		  "content" : "使用html5 API - window.history的popstate事件可以监听浏览器前进或者后退的动作。"
+		},
+		{
+		  "link" : "https://xianzhi-wu.github.io/blog/articles/lazyload.html",
+		  "img" : "/blog/images/lazyload.jpg",
+		  "content" : "使用lazyload，在可视区之外的图片将不会被加载，可以减少不必要的请求，减轻服务器的负担。"
 		}
 	]
 }
