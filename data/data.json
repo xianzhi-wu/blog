@@ -19,6 +19,11 @@
 		  "link" : "https://xianzhi-wu.github.io/blog/articles/lazyload.html",
 		  "img" : "/blog/images/lazyload.jpg",
 		  "content" : "使用lazyload，在可视区之外的图片将不会被加载，可以减少不必要的请求，减轻服务器的负担。"
+		},
+		{
+		  "link" : "https://xianzhi-wu.github.io/blog/articles/arithmetic.html",
+		  "img" : "/blog/images/math.jpg",
+		  "content" : "解决JS浮点数加减乘除精度问题"
 		}
 	]
 }
