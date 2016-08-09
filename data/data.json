@@ -25,5 +25,12 @@
 		  "img" : "/blog/images/math.jpg",
 		  "content" : "解决JS浮点数加减乘除精度问题"
 		}
+	],
+	"articles2" : [
+		{
+		  "link" : "https://xianzhi-wu.github.io/blog/articles/pic-viewer.html",
+		  "img" : "/blog/images/pic-viewer.jpg",
+		  "content" : "原生js仿新浪微博，点击小图弹出显示大图"
+		}
 	]
 }
