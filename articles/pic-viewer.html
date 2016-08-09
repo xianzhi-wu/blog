@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no,email=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-full-screen" content="yes" />
+<meta name="mobile-web-app-capable" content="yes">
+<title></title>
+<style>
+*{margin:0;padding:0;}
+body{background:#f2f2f2;}
+img{width:100%;}
+.page{width:540px;margin:0 auto;}
+.detail{background:#fff;margin:10px 0;padding:10px;}
+.detail .text{line-height:20px;font-size:14px;margin-bottom:12px;}
+.detail .pic-list{overflow:hidden;width:290px;}
+.detail .pic-list li{width:90px;height:90px;border:1px solid #eee;box-sizing:border-box;float:left;list-style:none;margin:0 5px 5px 0;background-size:cover;background-repeat:no-repeat;}
+.cover-bg{position:fixed;top:0;left:0;right:0;bottom:0;z-index:9990;background:#000;}
+.tran_effect{-webkit-transition: all 0.3s linear;transition: all 0.3s linear;-webkit-backface-visibility: hidden;}
+.index {position:absolute;z-index:10000;height:24px;line-height:24px;left:0;right:0;text-align:center;color:#fff;text-shadow:1px 1px 2px #000;}
+.pic_focus_wrapper{height:100%;width:100%;overflow:hidden;}
+.pic_focus_wrapper ul{position:relative;z-index:9999;top:0;left:0;height:100%;width:100%;overflow:hidden;}
+.pic_focus_wrapper ul li{float:left;text-align:center;height:100%;width:100%;overflow:hidden;}
+.pic_focus_wrapper ul li>div{transform-origin: 0px 0px 0px;}
+.pic_focus_wrapper ul li>div img {display:inline-block;vertical-align:middle;}
+</style>
+</head>
+<body>
+    <div style="font-size: 20px;text-align: center;color: #000; font-weight:bold;margin-top:16px;">原生js仿新浪微博，点击小图弹出显示大图</div>
+    <div style="text-align: center;color: #999;">by Zhi</div>
+    <div class="page">
+        <section class="detail">
+            <p class="text">测试测试测试测试测试测试测试测试测试</p>
+            <div class="pic-list">
+                <ul>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/flex.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/flex.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/closure.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/closure.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/history.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/history.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/lazyload.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/lazyload.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/math.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/math.jpg"></li>
+                </ul>
+            </div>
+        </section>
+        <section class="detail">
+            <p class="text">测试测试测试测试测试测试测试测试测试</p>
+            <div class="pic-list">
+                <ul>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/flex.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/flex.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/closure.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/closure.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/lazyload.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/lazyload.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/math.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/math.jpg"></li>
+                </ul>
+            </div>
+        </section>
+        <section class="detail">
+            <p class="text">测试测试测试测试测试测试测试测试测试</p>
+            <div class="pic-list">
+                <ul>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/flex.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/flex.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/math.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/math.jpg"></li>
+                </ul>
+            </div>
+        </section>
+        <section class="detail">
+            <p class="text">测试测试测试测试测试测试测试测试测试</p>
+            <div class="pic-list">
+                <ul>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/flex.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/flex.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/closure.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/closure.jpg"></li>
+                    <li class="lazy" style="background-image:url(https://xianzhi-wu.github.io/blog/images/math.jpg);" data-src="https://xianzhi-wu.github.io/blog/images/math.jpg"></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <script src="js/iscroll-lite.js"></script>
+    <script src="js/pic-viewer.js"></script>
+</body>
+</html>
