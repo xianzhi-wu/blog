@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+<meta name="format-detection" content="telephone=no" />
+<meta name="format-detection" content="email=no" />
+<meta name="apple-mobile-web-app-title" content="">
+<meta name="Keywords" content=""/>
+<meta name="Description" content=""/>
+<title>Untitled Document</title>
+<link type="text/css" rel="stylesheet" href="css/common.css">
+<style type="text/css">
+* {margin:0;padding:0;}
+body {min-width:320px;max-width:736px;margin:0 auto;background:#f0f0f0;font-family:Helvetica,Hiragino Sans GB,Arial,"宋体",sans-serif;-webkit-font-smoothing:antialiased;color:#333;}
+i {font-style:normal;display:block;}
+ul, li {list-style:none;}
+
+.hide {display:none;}
+.popup-tip{position:fixed;z-index:9999;left:50%;margin-left:-120px;top:50%;margin-top:-20px;color:#fff;border-radius:6px;height:40px;line-height:40px;width:240px;text-align:center;background:rgba(0, 0, 0, 0.8)!important;filter:alpha(opacity=80);background:#000;font-size:14px;}
+
+.delete-area {position:absolute;top:26px;left:8px;height:44px;width:44px;}
+.delete-area .delete-icon {position:relative;height:20px;width:20px;border-radius:50%;margin:10px auto 0;overflow:hidden;background:#f00;transform:rotate(45deg);
+-ms-transform:rotate(45deg);-moz-transform:rotate(45deg);-webkit-transform:rotate(45deg);}
+.delete-area .delete-icon:before {position:absolute;content:'';border-left:2px solid #fff;height:12px;left:9px;top:4px;}
+.delete-area .delete-icon:after {position:absolute;content:'';border-bottom:2px solid #fff;width:12px;left:4px;top:9px;}
+.post-wrapper {background:#fff;margin-bottom:12px;padding-bottom:1px;border-bottom:1px solid #e0e0e0;}
+.post-wrapper h3 {padding-left:12px;height:44px;line-height:44px;border-bottom:1px solid #e0e0e0;position:relative;}
+.post-wrapper h3 #upload {position:absolute;right:12px;top:0;height:44px;}
+.post-wrapper .uploaded-pics {margin-top:2.5%;overflow:hidden;}
+.post-wrapper ul li, .post-wrapper .add-pic {width:30%;padding-top:30%;margin:0 0 2.5% 2.5%;float:left;position:relative;background-color:#f8f8f8;}
+.post-wrapper .add-pic:before {position:absolute;display:block;content:'';height:50%;width:4px;background:#e4e4e4;top:25%;left:50%;margin-left:-2px;}
+.post-wrapper .add-pic:after {position:absolute;display:block;content:'';width:50%;height:4px;background:#e4e4e4;left:25%;top:50%;margin-top:-2px;}
+.load-pic {background:url(images/icons/loading.gif);height:19px;width:19px;background-size:19px 19px;position:absolute;z-index:9999;top:50%;margin-top:-10px;left:50%;margin-left:-10px;}
+.post-wrapper ul li .delete-area {height:20px;width:20px;left:auto;right:2px;top:2px;}
+.post-wrapper ul li .delete-icon {margin-top:0;background:#999;}
+.post-wrapper ul li p {height:20px;line-height:20px;position:absolute;top:50%;margin-top:-10px;left:0;right:0;text-align:center;font-size:14px;color:#999;}
+.post-wrapper .camera-add {width:30%;padding-top:30%;margin:0 auto 2.5%;position:relative;}
+.post-wrapper .camera-add .camera-icon {background:url(images/icons/camera.png) no-repeat;height:46px;width:53px;background-size:53px 46px;position:absolute;top:50%;margin-top:-23px;left:50%;margin-left:-27px;}
+</style>
+</head>
+
+<body>
+<section class="content">
+    <h1>使用input[type='file']调用手机摄像头拍摄并上传图片（canvas处理）</h1>   
+    <div class="author">by Zhi</div>
+    <div class="subTitle">上传</div>
+    <p>使用<span><</span>input type="file" capture="camera" accept="image/jpg, image/jpeg, image/png, image/gif">可以调用系统默认相拍照机，相册上传图片。<br>
+    input[type='file']的默认样式很难看，我们可以将其隐藏，通过点击自己设置的图标来触发它的点击事件。代码如下：
+    <pre>
+    <span><</span>div class="camera-add"><span><</span>i class="camera-icon" id="addPic-01"><span><</span>/i></div>
+    <span><</span>div style="height:0px;overflow:hidden;">
+        <span><</span>input type="file" id="f-pic" style="visibility:hidden;" capture="camera" accept="image/jpg, image/jpeg, image/png, image/gif">
+    <span><</span>/div>
+    $("#addPic-01").on("click", function(){
+        $("#f-pic").click();
+    })
+    </pre>
+    在开发的过程中，如果上传白切牛肉，删掉。
+    <img src="images/input-file.jpg">
+    如果再想上传'白切牛肉.jpg'，上传不了。这是因为第一次上传和第二次上传后，input[id='f-pic']里面文字是一样的，触发不了change事件。解决的办法简单粗暴，用replaceWith把旧的input[id='f-pic']替换掉。使用live()方法创建事件处理程序。
+    </p>
+    <div class="subTitle">canvas处理图片</div>
+     <p>使用createObjectURL生成数据链接。</p>
+    <pre>
+    function getObjectURL(file) {
+		var url = null;
+		if (window.createObjectURL != undefined) { // basic
+			url = window.createObjectURL(file);
+		} else if (window.URL != undefined) { // mozilla(firefox)
+			url = window.URL.createObjectURL(file);
+		} else if (window.webkitURL != undefined) { // webkit or chrome
+			url = window.webkitURL.createObjectURL(file);
+		}
+		return url;
+	}
+    </pre>
+    <p>使用canvas生成处理图片并生成base64编码，显示预览。</p>
+    <pre>
+    function getImgToCanvasData(img, nw, nh, Orientation) {
+		// 新的临时画布
+		nw = Math.floor(nw);
+		nh = Math.floor(nh);
+		var canvas = document.createElement("canvas");
+		var ctx = canvas.getContext("2d");
+		$(canvas).attr({
+			width: nw,
+			height: nh
+		});
+		ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+        var data = null;
+        data = canvas.toDataURL("image/jpeg");
+        return data;
+    }
+    </pre>
+    <p>可以使用getObjectURL()方法中返回的url进行图片预览。因为手机拍摄的图片有时候如果不经过处理直接预览，图片会旋转逆时针旋转90度或顺时针旋转90度，这里使用<a href="https://github.com/exif-js/exif-js" style="display:inline-block;text-decoration:underline;color:#f00;">exif.js</a>判断并使用canvas进行处理。</p>
+</section>
+<h2>完整示例：</h2>
+<section class="post-wrapper">
+    <form method="post">
+        <h3>图片<span id="pic-tip"></span><a href="javascript:void(0);" id="upload">上传</a></h3>
+        <div class="uploaded-pics">
+            <ul></ul>
+            <div class="camera-add"><i class="camera-icon" id="addPic-01"></i></div>
+            <div class="add-pic hide" id="addPic-02"></div>
+        </div>
+        <div id="div-imgdata" class="hide"></div>
+    </form>   
+</section>
+<div style="height:0px;overflow:hidden;">
+    <input type="file" id="f-pic" style="visibility:hidden;" capture="camera" accept="image/jpg, image/jpeg, image/png, image/gif">
+</div>
+<script src="js/zepto.min.js"></script>
+<script src="js/exif.js"></script>
+<script src="js/canvasFuns.js"></script>
+<script src="js/post-func.js"></script>
+</body>
+</html>
