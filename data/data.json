@@ -35,7 +35,7 @@
 		{
 		  "link" : "https://xianzhi-wu.github.io/blog/articles/input-camera.html",
 		  "img" : "/blog/images/camera.jpg",
-		  "content" : "使用input[type='file']调用手机摄像头拍照并上传图片（canvas处理）"
+		  "content" : "使用input[type='file']调用手机摄像头拍照，canvas处理图片并上传"
 		}
 	]
 }
