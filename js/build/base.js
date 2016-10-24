@@ -41,7 +41,7 @@ define("base", ["zepto"], function($){
 					element.attr('src', placeholder);
 				}
 			} else {
-				if(element.css('background').indexOf('no-repeat') < 0) {
+				if(element.css('background').indexOf('no-repeat center center #eee') < 0) {
 					element.css('background', 'url('+ placeholder +') no-repeat center center #eee');
 				}
 			}
