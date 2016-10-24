@@ -4,8 +4,7 @@
 var canvasFunc = {
 	getImgToCanvasData : function(img, nw, nh, Orientation) {
 		// 新的临时画布
-		nw = Math.floor(nw);
-		nh = Math.floor(nh);
+		var nw = Math.floor(nw), nh = Math.floor(nh);
 		var canvas = document.createElement("canvas");
 		var ctx = canvas.getContext("2d");
 		$(canvas).attr({
