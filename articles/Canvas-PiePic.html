@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">       
+<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-touch-fullscreen" content="yes">
+<meta name="full-screen" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<meta name="format-detection" content="address=no">
+<title>canvas绘制数据图</title>
+<link rel="stylesheet" href="css/common.css">
+<link rel="stylesheet" href="css/flex.css">
+<style type="text/css">
+.detail-section .circle-data {
+    position: relative;
+    height: 278px;
+    overflow: hidden;
+}
+.detail-section .circle {
+    position: relative;
+    margin: 18px auto 0;
+    height: 207px;
+    width: 207px;
+    border: 1px solid #329bff;
+    border-radius: 50%;
+    -webkit-border-radius: 50%;
+}
+.detail-section .asset {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    line-height: 20px;
+    color: #333;
+}
+.detail-section .asset .total-money {
+    font-size: 18px;
+    line-height: 24px;
+}
+.detail-section .circle-data .balance {
+    position: absolute;
+    color: #666;
+    font-size: 12px;
+    height: 22px;
+    line-height: 22px;
+}
+.detail-section .circle-data .balance:before {
+    content: '';
+    display: inline-block;
+    height: 8px;
+    width: 8px;
+    background: #329bff;
+    position: relative;
+    top: -1px;
+    margin-right: 8px; 
+}
+.detail-section .circle-data .available {
+    top: 18px;
+    left: 0;
+}
+.detail-section .circle-data .blocked {
+    top: 18px;
+    right: 16px;
+}
+.detail-section .circle-data .blocked:before {
+    background: #98CDFF;
+}
+.detail-section .circle-data .closing {
+    left: 0;
+    bottom: 28px;
+}
+.detail-section .circle-data .closing:before {
+    background: #999;
+}
+ @media screen and (width: 320px) {
+    .detail-section .circle {
+        margin-top: 36px;
+    }
+    .detail-section .circle-data .closing {
+        bottom: 10px;
+    }
+}
+</style>
+</head>
+<body>
+<div class="content">
+    <h1>canvas绘制数据图</h1>
+    <div class="author">by Zhi</div>
+    <br>
+    <p>使用canvas绘制数据图。</p>
+    <div class="detail-section">
+        <div class="circle-data">
+            <div class="circle">
+                <canvas id="canvas" width="190" height="190" style="display:block;margin:9px auto"></canvas>
+                <div class="asset">
+                    总资产(元)<br><div class="total-money">10000.00</div>
+                </div>
+            </div>
+            <div class="balance available">可用余额≈10.00%</div>
+            <div class="balance blocked">冻结金额≈20.00%</div>
+            <div class="balance closing">待收投资总额≈70.00%</div>
+        </div>
+    </div>
+    <h4>js代码：</h4>
+    <pre>
+    function drawData(angle){
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+        var data = [
+            {
+                lineWidth: 15,
+                strokeStyle: "#329BFF",
+                radius: 86.5,
+                angle: [(220/360), (angle[0]/360)]
+            },
+            {
+                lineWidth: 8,
+                strokeStyle: "#98cdff",
+                radius: 90,
+                angle: [(angle[0]/360), (angle[1]/360)]
+            },
+            {
+                lineWidth: 12,
+                strokeStyle: "#999",
+                radius: 88,
+                angle: [(angle[1]/360), (220/360)]
+            }
+        ];
+        for(var i = 0, len = data.length; i < len; i++) {
+            ctx.beginPath();
+            ctx.lineWidth = data[i].lineWidth;
+            ctx.strokeStyle = data[i].strokeStyle;
+            ctx.arc(95, 95, data[i].radius, data[i].angle[0]*Math.PI*2, data[i].angle[1]*Math.PI*2);
+            ctx.stroke();
+        }
+    }
+
+    var allMoney = 10000, unavailableMoney = 2000, blockedMoney = 7000;
+    unavailableBalancePer = allMoney > 0 ? (unavailableMoney/allMoney*100).toFixed(2) : (0).toFixed(2);
+    blockedBalancePer = allMoney > 0 ? (blockedMoney/allMoney*100).toFixed(2) : (0).toFixed(2);
+    availableBalancePer = allMoney > 0 ? (10000-unavailableBalancePer*100-blockedBalancePer*100)/100 : (0).toFixed(2);
+
+    var angle1 = (360*availableBalancePer/100+220)%360,
+        angle2 = (angle1+360*unavailableBalancePer/100)%360;
+    var angleArr = [];
+    angleArr.push(angle1);
+    angleArr.push(angle2);
+
+    drawData(angleArr);
+    </pre>
+</div>
+<script>
+    function drawData(angle){
+        var canvas = document.getElementById("canvas"),
+            ctx = canvas.getContext("2d");
+        var data = [
+            {
+                lineWidth: 15,
+                strokeStyle: "#329BFF",
+                radius: 86.5,
+                angle: [(220/360), (angle[0]/360)]
+            },
+            {
+                lineWidth: 8,
+                strokeStyle: "#98cdff",
+                radius: 90,
+                angle: [(angle[0]/360), (angle[1]/360)]
+            },
+            {
+                lineWidth: 12,
+                strokeStyle: "#999",
+                radius: 88,
+                angle: [(angle[1]/360), (220/360)]
+            }
+        ];
+        for(var i = 0, len = data.length; i < len; i++) {
+            ctx.beginPath();
+            ctx.lineWidth = data[i].lineWidth;
+            ctx.strokeStyle = data[i].strokeStyle;
+            ctx.arc(95, 95, data[i].radius, data[i].angle[0]*Math.PI*2, data[i].angle[1]*Math.PI*2);
+            ctx.stroke();
+        }
+    }
+
+    var allMoney = 10000, unavailableMoney = 2000, blockedMoney = 7000;
+    unavailableBalancePer = allMoney > 0 ? (unavailableMoney/allMoney*100).toFixed(2) : (0).toFixed(2);
+    blockedBalancePer = allMoney > 0 ? (blockedMoney/allMoney*100).toFixed(2) : (0).toFixed(2);
+    availableBalancePer = allMoney > 0 ? (10000-unavailableBalancePer*100-blockedBalancePer*100)/100 : (0).toFixed(2);
+
+    var angle1 = (360*availableBalancePer/100+220)%360,
+        angle2 = (angle1+360*unavailableBalancePer/100)%360;
+    var angleArr = [];
+    angleArr.push(angle1);
+    angleArr.push(angle2);
+
+    drawData(angleArr);
+</script>
+</body>
+</html>
