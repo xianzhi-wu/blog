@@ -18,6 +18,9 @@ define("base", ["zepto"], function($){
 						if(_this.is('img')) {
 							_this.attr('src', img);
 						} else {
+							if(_this.hasClass('placeholder-bg')) {
+							        _this.removeClass('placeholder-bg');
+							}
 							//如果作为背景图
 							_this.css('background', '');
 							_this.css('background-image', 'url('+ img +')');
@@ -41,8 +44,13 @@ define("base", ["zepto"], function($){
 					element.attr('src', placeholder);
 				}
 			} else {
-				if(element.css('background').indexOf('no-repeat center center #eee') < 0) {
-					element.css('background', 'url('+ placeholder +') no-repeat center center #eee');
+				if(!element.hasClass('placeholder-bg')) {
+					if(!!placeholder) {
+						element.css('background', 'url('+ placeholder +') no-repeat center center #dfdfdf');
+					} else {
+						element.css('background', '#dfdfdf');
+					}
+					element.addClass('placeholder-bg');	
 				}
 			}
 	    }
