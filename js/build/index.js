@@ -37,10 +37,6 @@ requirejs(["zepto", "base"], function($, base){
 	        init : function(){
 			$("#test").on("click",function(){
 				$(this).prop("type", "number");
-				setTimeout(function(){
-					$("#test").prop("type", "text");
-					$("#test").val("1234 56789");
-				},300);
 			});			
 	        	var _this = this;
 	        	_this.showArticles();
