@@ -35,7 +35,7 @@ requirejs(["zepto", "base"], function($, base){
 			},
 			
 	        init : function(){
-			$("#test").on("click",function(){
+			$("#test").on("focus",function(){
 				$(this).prop("type", "number");
 			});			
 	        	var _this = this;
