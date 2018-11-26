@@ -35,7 +35,7 @@ requirejs(["zepto", "base"], function($, base){
 			},
 			
 	        init : function(){
-			$("#test").on("focus",function(){
+			$("#test").on("click",function(){
 				$(this).prop("type", "number");
 				setTimeout(function(){
 					$("#test").prop("type", "text");
