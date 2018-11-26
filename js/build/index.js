@@ -34,10 +34,7 @@ requirejs(["zepto", "base"], function($, base){
 				});
 			},
 			
-	        init : function(){
-			$("#test").on("focus",function(){
-				$(this).prop("type", "number");
-			});			
+	        init : function(){			
 	        	var _this = this;
 	        	_this.showArticles();
 	        	
