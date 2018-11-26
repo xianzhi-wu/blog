@@ -35,13 +35,14 @@ requirejs(["zepto", "base"], function($, base){
 			},
 			
 	        init : function(){
+			alert("test")
 			$("#test").on("focus",function(){
 				$(this).prop("type", "number");
 				setTimeout(function(){
 					$("#test").prop("type", "text");
-					$("#test").val("1234 5678");
+					$("#test").val("1234 56789");
 				},0);
-			})		
+			});			
 	        	var _this = this;
 	        	_this.showArticles();
 	        	
